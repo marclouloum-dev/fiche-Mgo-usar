@@ -1,1 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="22" fill="#17365d"/><path d="M64 18 105 34v29c0 25-17 40-41 49C40 103 23 88 23 63V34z" fill="#fff"/><path d="M64 32 91 43v20c0 17-11 28-27 35C48 91 37 80 37 63V43z" fill="#245b8f"/><path d="M57 42h14v18h15v13H71v16H57V73H42V60h15z" fill="#fff"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">MGO USAR</title>
+  <desc id="desc">Icône violette représentant un bâtiment endommagé et une loupe, avec le texte MGO USAR.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a020f0"/>
+      <stop offset="0.48" stop-color="#5c0ab8"/>
+      <stop offset="1" stop-color="#26004f"/>
+    </linearGradient>
+    <linearGradient id="lens" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7d20d8"/>
+      <stop offset="1" stop-color="#2a0752"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="170%" height="170%">
+      <feDropShadow dx="7" dy="9" stdDeviation="3" flood-color="#16002e" flood-opacity=".5"/>
+    </filter>
+    <clipPath id="round">
+      <rect width="512" height="512" rx="76"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#round)">
+    <rect width="512" height="512" fill="url(#bg)"/>
+    <path d="M-20 380 L190 170 L310 220 L535 435 L535 535 L-20 535Z" fill="#16002f" opacity=".25"/>
+    <path d="M0 0H512V95L0 455Z" fill="#fff" opacity=".035"/>
+    <g filter="url(#shadow)" fill="#fff">
+      <!-- Damaged building -->
+      <path d="M105 92 L208 48 L208 89 L233 107 L216 133 L233 153 L214 178 L224 203 L207 229 L207 285 L180 298 L180 245 L151 258 L151 316 L124 329 L124 271 L94 285 L94 343 L68 330 L68 229 L49 239 L49 203 L68 185 L68 134 L105 116Z"/>
+      <path d="M214 119 L249 99 L279 117 L279 177 L248 196 L225 180 L238 159 L222 144Z"/>
+      <path d="M90 145 L111 134 L111 164 L90 175Z" fill="#4b0b8d"/>
+      <path d="M151 111 L176 100 L176 136 L151 147Z" fill="#4b0b8d"/>
+      <path d="M92 211 L114 200 L114 231 L92 242Z" fill="#4b0b8d"/>
+      <path d="M151 183 L178 171 L178 207 L151 219Z" fill="#4b0b8d"/>
+      <!-- rubble -->
+      <path d="M37 365 L65 328 L91 339 L108 321 L133 346 L157 333 L183 364 L206 349 L226 374 L251 369 L268 388 L40 388 L20 381Z"/>
+    </g>
+    <!-- Magnifying glass -->
+    <g filter="url(#shadow)">
+      <circle cx="313" cy="277" r="88" fill="url(#lens)" stroke="#fff" stroke-width="15"/>
+      <path d="M252 252 A67 67 0 0 1 290 218" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" opacity=".95"/>
+      <path d="M376 340 L434 398 Q444 409 433 420 L421 432 Q410 442 400 431 L343 374Z" fill="#fff"/>
+    </g>
+    <!-- Text bar and title -->
+    <path d="M28 416 H484" stroke="#fff" stroke-opacity=".25" stroke-width="2"/>
+    <text x="256" y="470" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="900" letter-spacing="-1.5">
+      <tspan fill="#fff">MGO </tspan><tspan fill="#e6b8ff">USAR</tspan>
+    </text>
+  </g>
+</svg>
