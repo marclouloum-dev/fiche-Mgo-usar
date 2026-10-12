@@ -18,7 +18,7 @@ label.field{display:block;font-size:.85rem;font-weight:650;color:#334155}input[t
 .progress{height:8px;background:#dfe7ee;border-radius:99px;overflow:hidden;margin:8px 0}.progress div{height:100%;width:0;background:var(--green);transition:width .15s}
 .progressline{display:flex;justify-content:space-between;gap:8px;font-size:.85rem;color:var(--muted)}
 .phasehead{padding:13px 15px;background:var(--pale);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}.phasehead .num{background:var(--navy);color:white;border-radius:7px;padding:4px 8px;font-size:.8rem;font-weight:800;white-space:nowrap}
-.items{padding:4px 14px}.item{display:flex;align-items:flex-start;gap:11px;padding:11px 2px;border-bottom:1px solid #edf1f4}.item:last-child{border-bottom:0}.item input{width:21px;height:21px;flex:0 0 21px;margin:1px 0 0;accent-color:var(--green)}.item span{flex:1}.item.done span{text-decoration:line-through;color:#718096}
+.items{padding:4px 14px}.item{display:flex;align-items:flex-start;gap:11px;padding:11px 2px;border-bottom:1px solid #edf1f4}.item:last-child{border-bottom:0}.item input{width:21px;height:21px;flex:0 0 21px;margin:1px 0 0;accent-color:var(--green)}.inline-input,.inline-select{display:inline-block;width:auto;max-width:48%;margin:0 0 0 8px!important;padding:5px 7px!important;font:inherit;font-size:.88rem!important;border:1px solid #b8c5d1;border-radius:6px}.item .fieldwrap{flex:1;min-width:0}.item .itemtext{flex:initial}.item.done span{text-decoration:none}.item span{flex:1}.item.done span{color:#16734a;font-weight:600}
 .subfield{padding:0 14px 12px}.subfield textarea{min-height:60px;resize:vertical}.yesno{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:5px}.yesno label{font-weight:500;display:flex;gap:6px;align-items:center}.yesno input{width:18px;height:18px}
 .note{font-size:.83rem;color:var(--muted)}.status{font-size:.83rem;color:var(--green);font-weight:650}.foot{font-size:.78rem;color:var(--muted);margin-top:14px}
 @media(max-width:600px){header{padding:15px}main{padding:0 9px 28px;margin-top:10px}.fields{grid-template-columns:1fr}.panel{padding:13px}.toolbar .btn{flex:1}.phasehead{align-items:flex-start}.phasehead h2{font-size:.98rem}}
@@ -39,56 +39,64 @@ label.field{display:block;font-size:.85rem;font-weight:650;color:#334155}input[t
 <section class="panel">
 <div class="progressline"><strong>Avancement de la check-list</strong><span id="count">0 / 0 actions cochées</span></div>
 <div class="progress"><div id="bar"></div></div>
-<div class="toolbar">
-<button class="btn primary" id="save">Enregistrer</button><button class="btn" id="export">Exporter les données (.json)</button><button class="btn" id="print">Imprimer / PDF</button><button class="btn danger" id="reset">Nouvelle opération / Effacer</button>
-</div>
-<div class="status" id="status" aria-live="polite">Les modifications sont enregistrées automatiquement sur cet appareil.</div>
-<p class="note">La sauvegarde locale est propre à ce navigateur et à cet appareil. Pour transférer ou archiver une opération, utilisez « Exporter les données ».</p>
+
 </section>
 <div id="phases"></div>
 <section class="panel"><h2>Point de situation à chaque relève</h2>
 <div id="relève"></div>
 <label class="field" style="margin-top:12px">Observations / décisions / transmissions<textarea id="observations" placeholder="Renseignements utiles au suivi de l’opération…"></textarea></label>
 </section>
-<p class="foot">Auteur : <strong>Marc Louloum — SDIS 33</strong><br>Aide-mémoire opérationnel basé sur la fiche mémento GDO USAR fournie. À adapter aux décisions du COS et aux procédures opérationnelles applicables. La check-list ne remplace pas la doctrine ni les ordres opérationnels.</p>
+<section class="panel" id="final-controls">
+<h2>Enregistrement et transmission</h2>
+<div class="toolbar">
+<button class="btn primary" id="save">Enregistrer</button>
+<button class="btn" id="print">Imprimer / PDF</button>
+<button class="btn" id="email">Transmettre par mail</button>
+<button class="btn danger" id="reset">Nouvelle opération / Effacer</button>
+</div>
+<div class="status" id="status" aria-live="polite">Les modifications sont enregistrées automatiquement sur cet appareil.</div>
+<p class="note">Le courriel est préparé dans votre messagerie avec un récapitulatif des actions. Vérifiez-le avant l’envoi et joignez le PDF si nécessaire.</p>
+</section>
+<p class="foot">Aide-mémoire opérationnel basé sur la fiche mémento GDO USAR fournie. À adapter aux décisions du COS et aux procédures opérationnelles applicables. La check-list ne remplace pas la doctrine ni les ordres opérationnels.</p>
 </main>
 <script>
 const phases=[
 {title:"PHASE 1 — MGO1 : RECONNAISSANCE GÉNÉRALE DE LA ZONE",items:[
 "Reconnaissance déclenchée, groupe horaire :","Étendue et portée du sinistre évaluées.","Bâtiments touchés et dommages principaux repérés.","Ressources nécessaires en urgence recensées.","Sectorisation proposée et priorités initiales définies.","Risques secondaires identifiés.","Infrastructures impactées repérées.","Points de transit et camps de base repérés si nécessaires.","Résultats de la reconnaissance transmis rapidement au COS.","Principe respecté : rester mobile et ne pas engager de sauvetage lourd durant cette reconnaissance."
-]},
+],fields:{0:{label:"Groupe horaire"},3:{label:"Ressources"},5:{label:"Précisions"},6:{label:"Précisions"},7:{label:"Précisions"}}},
 {title:"PHASE 2 — MGO2 : RECONNAISSANCE ET ÉVALUATION DU SECTEUR OU S/SECTEUR",items:[
-"Décision de lancer la MGO2 après MGO1 ou directement si intervention de faible ampleur.","Secteur / sous-secteur identifié et codé par lettre.","Sites identifiés et numérotés (ex. : C1, C2, C3).","Sites à forte potentialité de sauvetage identifiés et priorisés.","Renseignements recueillis auprès des primo-intervenants.","Renseignements recueillis auprès de la population si disponibles.","Évaluation réalisée rapidement mais méthodiquement.","Bâtiments ou ruines visités marqués.","Priorités et informations actualisées transmises aux équipes et au COS."
-],yesno:"Composition de l’équipe adaptée : USAR / cynotechnique / RBAT / RCH / sécurité selon besoin."},
+"Déterminer le déclenchement de la MGO2.","Secteur / sous-secteur identifié et codé par lettre.","Sites identifiés et numérotés (ex. : C1, C2, C3).","Sites à forte potentialité de sauvetage identifiés et priorisés.","Renseignements recueillis auprès des primo-intervenants.","Renseignements recueillis auprès de la population si disponibles.","Évaluation réalisée rapidement mais méthodiquement.","Bâtiments ou ruines visités marqués.","Priorités et informations actualisées transmises aux équipes et au COS."
+],fields:{0:{type:"select",options:["MGO2 lancée directement","MGO2 lancée après MGO1"]},1:{label:"Secteur / sous-secteur"},2:{label:"Sites"},3:{label:"Priorités"},4:{label:"Renseignements"},5:{label:"Renseignements"}},yesno:"Composition de l’équipe adaptée : USAR / cynotechnique / RBAT / RCH / sécurité selon besoin."},
 {title:"MARQUAGE ET SUIVI DES CHANTIERS",items:[
 "Marquage utilisé conformément au système retenu sur l’opération (référence INSARAG si applicable).","Résultats des reconnaissances reportés.","Engagements des équipes et informations utiles reportés.","Croquis / suivi des sites mis à jour.","Informations accessibles aux équipes entrantes et lors des relèves."
 ]},
 {title:"PHASE 3 — MGO3 : PREMIÈRE OPÉRATION DE RECHERCHE ET DE SAUVETAGE (Victimes facilement accessibles)",items:[
 "Unité constituée : chef d’unité + un ou deux binômes ; appuis cynotechnique/RCH si besoin.","Abords des bâtiments sinistrés ratissés.","Lieux de survie accessibles vérifiés rapidement.","Victimes accessibles dégagées et évacuées.","Limite de la MGO3 prise en compte : les victimes profondément ensevelies peuvent ne pas être localisées.","Chantiers nécessitant une MGO4 ou une MGO5 identifiés.","Victimes prises en charge et suivi mis à jour.","Croquis et informations chantier mis à jour."
-]},
+],fields:{1:{label:"Précisions"},3:{type:"number",label:"Nombre"},6:{type:"number",label:"Nombre"}}},
 {title:"PHASE 4 — MGO4 : DEUXIÈME OPÉRATION DE RECHERCHE ET DE SAUVETAGE (Victimes ensevelies / difficilement accessibles)",items:[
 "Victimes potentiellement ensevelies non atteintes en MGO3 recherchées.","Moyens de détection adaptés mobilisés : cynotechnie, appels, radar, écoute, recherche visuelle.","Localisation précise de la victime recherchée puis confirmée autant que possible.","Point de localisation communiqué aux équipes concernées.","Règle vérifiée : aucune mobilisation de matériaux ni début de dégagement avant localisation de la victime.","Méthode de dégagement choisie selon victime, accès, travaux, personnels, moyens et risques.","Risques et évolution de la situation réévalués pendant l’action.","Informations de progression et croquis actualisés."
-]},
+],fields:{0:{type:"number",label:"Nombre recherché"},2:{label:"Localisation"}}},
 {title:"PHASE 5 — MGO5 : DÉBLAIEMENT GÉNÉRALISÉ / RECHERCHE DES CORPS",items:[
 "Phases de sauvetage achevées ou décision de transition formalisée.","Passage en MGO5 décidé par le COS sur décision du DOS.","Motif de transition établi : probabilité de victimes vivantes trop faible et/ou risques sanitaires trop importants.","Modalité retenue : enlèvement sélectionné à bras d’homme.","OU modalité retenue : enlèvement général avec engins après passage des sauveteurs.","Coordination des actions et suivi des découvertes assurés."
-]},
+],fields:{2:{type:"select",options:["Probabilité de victimes vivantes trop faible","Risques sanitaires trop importants","Les deux motifs"]},3:{type:"select",options:["Enlèvement sélectionné à bras d’homme","Enlèvement général avec engins après passage des sauveteurs"]},4:{type:"hidden"}}},
 {title:"RETOUR À LA NORMALE / CLÔTURE",items:[
 "Protection des intervenants maintenue jusqu’à la fin des opérations.","Relèves organisées et fatigue prise en compte.","Matériel contrôlé, nettoyé et reconditionné.","Éléments factuels utiles au RETEX conservés.","Bilan de fin d’opération et informations utiles transmis selon l’organisation retenue."
 ]}];
 const relItems=["COS / commandement et objectifs en cours confirmés.","Sites traités, sites en cours et sites restant à traiter identifiés.","Victimes localisées, dégagées, évacuées et informations associées mises à jour.","Risques, zonage, accès et moyens engagés réévalués.","Marquage, croquis et transmissions actualisés.","Priorités et consignes de la prochaine équipe transmises."];
 const $=id=>document.getElementById(id);let state={checks:{},fields:{},yesno:""};
-function renderList(items,container,prefix){items.forEach((txt,i)=>{let id=prefix+i,row=document.createElement("label");row.className="item";row.innerHTML=`<input type="checkbox" data-check="${id}"><span></span>`;row.querySelector("span").textContent=txt;container.appendChild(row);});}
-phases.forEach((ph,pi)=>{let sec=document.createElement("section");sec.className="phase";let head=document.createElement("div");head.className="phasehead";head.innerHTML=`<span class="num">${pi+1}</span><h2></h2>`;head.querySelector("h2").textContent=ph.title;sec.appendChild(head);let items=document.createElement("div");items.className="items";renderList(ph.items,items,"p"+pi+"-");sec.appendChild(items);
+function renderList(items,container,prefix,fields={}){items.forEach((txt,i)=>{let id=prefix+i,row=document.createElement("div");row.className="item";row.innerHTML=`<input type="checkbox" data-check="${id}"><div class="fieldwrap"><span class="itemtext"></span></div>`;row.querySelector(".itemtext").textContent=txt;let spec=fields[i];if(spec?.type==="hidden"){row.style.display="none"}else if(spec){let el;if(spec.type==="select"){el=document.createElement("select");el.className="inline-select";el.innerHTML='<option value="">Choisir…</option>'+spec.options.map(o=>'<option></option>').join("");[...el.options].slice(1).forEach((o,j)=>o.textContent=spec.options[j]);}else{el=document.createElement("input");el.type=spec.type||"text";el.className="inline-input";el.placeholder=spec.label||"Saisir…";}el.dataset.field="inline-"+id;row.querySelector(".fieldwrap").appendChild(el);}container.appendChild(row);});}
+phases.forEach((ph,pi)=>{let sec=document.createElement("section");sec.className="phase";let head=document.createElement("div");head.className="phasehead";head.innerHTML=`<span class="num">${pi+1}</span><h2></h2>`;head.querySelector("h2").textContent=ph.title;sec.appendChild(head);let items=document.createElement("div");items.className="items";renderList(ph.items,items,"p"+pi+"-",ph.fields||{});sec.appendChild(items);
 if(ph.yesno){let box=document.createElement("div");box.className="subfield";let lab=document.createElement("div");lab.className="field";lab.textContent=ph.yesno;box.appendChild(lab);let opts=document.createElement("div");opts.className="yesno";opts.innerHTML='<label><input type="radio" name="teamyesno" value="Oui"> Oui</label><label><input type="radio" name="teamyesno" value="Non"> Non</label>';box.appendChild(opts);sec.appendChild(box)}let obs=document.createElement("div");obs.className="subfield";obs.innerHTML='<label class="field">Notes / précisions (facultatif)<textarea data-field="note'+pi+'" placeholder="Secteur, site, décision, information à transmettre…"></textarea></label>';sec.appendChild(obs);$("phases").appendChild(sec);});
-renderList(relItems,$("relève"),"rel-");
-function collect(){state.checks={};document.querySelectorAll("[data-check]").forEach(x=>state.checks[x.dataset.check]=x.checked);state.fields={};document.querySelectorAll("[data-field],main input[type=text],main input[type=datetime-local],#observations").forEach(x=>{if(x.id)state.fields[x.id]=x.value;else if(x.dataset.field)state.fields[x.dataset.field]=x.value});state.yesno=document.querySelector('input[name="teamyesno"]:checked')?.value||"";return state}
+renderList(relItems,$("relève"),"rel-");const gh=document.createElement("label");gh.className="field";gh.style.display="block";gh.style.padding="8px 14px";gh.textContent="Groupe horaire de la relève";const ghi=document.createElement("input");ghi.type="text";ghi.className="inline-input";ghi.dataset.field="groupeHoraireReleve";ghi.placeholder="Groupe horaire";gh.appendChild(ghi);$("relève").appendChild(gh);
+function collect(){state.checks={};document.querySelectorAll("[data-check]").forEach(x=>state.checks[x.dataset.check]=x.checked);state.fields={};document.querySelectorAll("[data-field],main input[type=text],main input[type=datetime-local],main input[type=number],main select,#observations").forEach(x=>{if(x.id)state.fields[x.id]=x.value;else if(x.dataset.field)state.fields[x.dataset.field]=x.value});state.yesno=document.querySelector('input[name="teamyesno"]:checked')?.value||"";return state}
 function apply(){Object.entries(state.checks||{}).forEach(([id,val])=>{let x=document.querySelector(`[data-check="${id}"]`);if(x)x.checked=val});Object.entries(state.fields||{}).forEach(([id,val])=>{let x=$(id)||document.querySelector(`[data-field="${id}"]`);if(x)x.value=val});if(state.yesno){let x=document.querySelector(`input[name="teamyesno"][value="${state.yesno}"]`);if(x)x.checked=true}updateProgress()}
 function updateProgress(){let all=[...document.querySelectorAll("[data-check]")],done=all.filter(x=>x.checked).length;$("count").textContent=`${done} / ${all.length} actions cochées`;$("bar").style.width=(all.length?done/all.length*100:0)+"%";all.forEach(x=>x.closest(".item").classList.toggle("done",x.checked))}
 function save(silent=false){collect();localStorage.setItem("mgo-usar-state-v1",JSON.stringify(state));updateProgress();if(!silent)$("status").textContent="Opération enregistrée sur cet appareil."}
 let timer;document.addEventListener("input",e=>{if(e.target.matches("input,textarea")){updateProgress();clearTimeout(timer);timer=setTimeout(()=>save(true),250)}});document.addEventListener("change",()=>save(true));
 $("save").onclick=()=>save();$("print").onclick=()=>window.print();
+$("email").onclick=()=>{save(true);const s=collect();const lines=["MGO USAR — Suivi de l’opération","Opération : "+(s.fields.operation||""),"COS : "+(s.fields.cos||""),"Chef de détachement USAR : "+(s.fields.chef||""),"Date/heure : "+(s.fields.date||""),"Actions cochées : "+Object.values(s.checks).filter(Boolean).length+" / "+Object.keys(s.checks).length,"","ÉTAT DES ACTIONS :"];document.querySelectorAll("[data-check]").forEach(x=>{const label=x.closest(".item").querySelector(".itemtext")?.textContent||x.closest(".item").innerText;lines.push((x.checked?"[X] ":"[ ] ")+label)});lines.push("","Observations : "+(s.fields.observations||""),"","Auteur : Marc Louloum — SDIS 33");location.href="mailto:?subject="+encodeURIComponent("MGO USAR — "+(s.fields.operation||"Compte rendu"))+"&body="+encodeURIComponent(lines.join("\\n"));};
 $("reset").onclick=()=>{if(confirm("Effacer les données locales de cette opération et démarrer une nouvelle fiche ?")){localStorage.removeItem("mgo-usar-state-v1");location.reload()}};
-$("export").onclick=()=>{let blob=new Blob([JSON.stringify(collect(),null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="MGO_USAR_operation.json";a.click();URL.revokeObjectURL(a.href)};
+
 try{let saved=localStorage.getItem("mgo-usar-state-v1");if(saved){state=JSON.parse(saved);apply()}}catch(e){}
 if(!$("date").value){let d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());$("date").value=d.toISOString().slice(0,16)}
 if("serviceWorker" in navigator && location.protocol.startsWith("http"))navigator.serviceWorker.register("sw.js").catch(()=>{});
