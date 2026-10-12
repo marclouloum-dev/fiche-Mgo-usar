@@ -19,11 +19,13 @@ label.field{display:block;font-size:.85rem;font-weight:650;color:#334155}input[t
 .progressline{display:flex;justify-content:space-between;gap:8px;font-size:.85rem;color:var(--muted)}
 .phasehead{padding:13px 15px;background:var(--pale);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}.phasehead .num{background:var(--navy);color:white;border-radius:7px;padding:4px 8px;font-size:.8rem;font-weight:800;white-space:nowrap}
 .items{padding:4px 14px}.item{display:flex;align-items:flex-start;gap:11px;padding:11px 2px;border-bottom:1px solid #edf1f4}.item:last-child{border-bottom:0}.item input{width:21px;height:21px;flex:0 0 21px;margin:1px 0 0;accent-color:var(--green)}.inline-input,.inline-select{display:inline-block;width:auto;max-width:48%;margin:0 0 0 8px!important;padding:5px 7px!important;font:inherit;font-size:.88rem!important;border:1px solid #b8c5d1;border-radius:6px}.item .fieldwrap{flex:1;min-width:0}.item .itemtext{flex:initial}.item.done span{text-decoration:none}.item span{flex:1}.item.done span{color:#16734a;font-weight:600}
-.subfield{padding:0 14px 12px}.subfield textarea{min-height:60px;resize:vertical}.yesno{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:5px}.yesno label{font-weight:500;display:flex;gap:6px;align-items:center}.yesno input{width:18px;height:18px}
+.subfield{padding:0 14px 12px}.subfield textarea{min-height:150px;resize:vertical}.yesno{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:5px}.yesno label{font-weight:500;display:flex;gap:6px;align-items:center}.yesno input{width:18px;height:18px}
 .note{font-size:.83rem;color:var(--muted)}.status{font-size:.83rem;color:var(--green);font-weight:650}.foot{font-size:.78rem;color:var(--muted);margin-top:14px}
 @media(max-width:600px){header{padding:15px}main{padding:0 9px 28px;margin-top:10px}.fields{grid-template-columns:1fr}.panel{padding:13px}.toolbar .btn{flex:1}.phasehead{align-items:flex-start}.phasehead h2{font-size:.98rem}}
 @media print{body{background:white;font-size:11pt}header{padding:10px;background:white!important;color:#17365d;border-bottom:2px solid #17365d}header p{color:#334155}main{max-width:none;margin:0;padding:8px}.toolbar,.note,.status{display:none!important}.panel,.phase{break-inside:avoid;border-color:#aaa}.phasehead{background:#eee!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.item{padding:6px 2px}input[type=text],input[type=datetime-local],textarea{border:0;border-bottom:1px solid #aaa;border-radius:0;padding:3px}.subfield textarea{min-height:35px}}
-input.inline-input,select.inline-select{display:inline-block!important;width:auto!important;max-width:48%;min-width:100px;margin:0 0 0 8px!important;padding:5px 7px!important} .item .fieldwrap{display:flex;align-items:center;flex-wrap:wrap;gap:5px}.item .fieldwrap .itemtext{flex:0 1 auto} @media(max-width:600px){input.inline-input,select.inline-select{max-width:100%;min-width:85px}}\n</style></head>
+input.inline-input,select.inline-select{display:inline-block!important;width:auto!important;max-width:48%;min-width:100px;margin:0 0 0 8px!important;padding:5px 7px!important} .item .fieldwrap{display:flex;align-items:center;flex-wrap:wrap;gap:5px}.item .fieldwrap .itemtext{flex:0 1 auto} @media(max-width:600px){input.inline-input,select.inline-select{max-width:100%;min-width:85px}}
+textarea{min-height:150px;resize:vertical}#observations{min-height:200px}.foot.author{font-weight:700;color:#17365d;text-align:center;border-top:1px solid #cbd5e1;padding-top:14px;margin-top:18px}
+</style></head>
 <body>
 <header><h1>MGO USAR</h1><p>Check-list de suivi de l’opération</p></header>
 <main>
@@ -57,6 +59,7 @@ input.inline-input,select.inline-select{display:inline-block!important;width:aut
 <div class="status" id="status" aria-live="polite">Les modifications sont enregistrées automatiquement sur cet appareil.</div>
 <p class="note">Le courriel est préparé dans votre messagerie avec un récapitulatif des actions. Vérifiez-le avant l’envoi et joignez le PDF si nécessaire.</p>
 </section>
+<p class="foot author">Créateur de l’application : <strong>Marc Louloum — SDIS 33</strong></p>
 <p class="foot">Aide-mémoire opérationnel basé sur la fiche mémento GDO USAR fournie. À adapter aux décisions du COS et aux procédures opérationnelles applicables. La check-list ne remplace pas la doctrine ni les ordres opérationnels.</p>
 </main>
 <script>
